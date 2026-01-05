@@ -27,7 +27,7 @@ def Add(request):   #AddQst
     if not category_name:
         return redirect('Admin')
     
-    cat = get_object_or_404(AddCategory, CategoryName=category_name)
+    cat = get_object_or_404(AddCategory, CategoryName__iexact=category_name)
     if request.method == 'POST':
         ques = request.POST.get('question')
         op1 = request.POST.get('op1')
@@ -56,6 +56,7 @@ def Add(request):   #AddQst
     })
 
 def User(request):
+    category = None
     if request.method == 'POST':
         category = request.POST.get('cat')
     if category:
