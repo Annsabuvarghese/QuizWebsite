@@ -1,10 +1,11 @@
 from django.db import models
 
 class AddCategory(models.Model):
-    name = models.CharField(max_length=100,unique=True,default='python')
+    CategoryName = models.CharField(max_length=100,unique=True,default='python')
+    CategoryDescription = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.CategoryName
 
 class AddQues(models.Model):
     Ques = models.TextField()

@@ -10,38 +10,27 @@
 </head>
 
 <body>
-
+    <script src="{% static 'js/script1.js' %}"></script>
 
     <!-- <p>This is Admin html</p> -->
     <nav>
         <a href="{% url 'Admin' %}">Admin</a>
         <a href="{% url 'User' %}">User</a>
         <a href="{% url 'TakeQuiz' %}">Quiz</a>
-        <a href="{% url 'AddQst' %}">Quiz</a>
+        <a href="{% url 'AddQst' %}">AddQst</a>
     </nav>
     <form method="POST">
         {% csrf_token %}
-        <div id="CategoryDiv">
-            <h2>Python</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam incidunt eum necessitatibus
-                illo porro magnam sequi possimus
-                praesentium ad facilis dicta labore
-                nulla, alias consectetur pariatur sed nesciunt dolor quibusdam?</p>
-
-            <button type="submit" name="cat" value="Python">Add Questions</button>
-        </div>
-
-        <div id="CategoryDiv">
-            <h2>Java</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam incidunt eum necessitatibus
-                illo porro magnam sequi possimus
-                praesentium ad facilis dicta labore
-                nulla, alias consectetur pariatur sed nesciunt dolor quibusdam?</p>
-
-            <button type="submit" name="cat" value="Java">Add Questions</button>
-        </div>
-
+        <button type="button" value="addcategory" onclick="CreateCategory()">Create Category</button>
+        <input type="hidden" name="category" value="{{ category }}">
     </form>
+    <div id="CategoryDiv">
+
+    </div>
+    { for }
+
+
+
     <br><br>
     <marquee behavior="" direction="left">
         <footer>

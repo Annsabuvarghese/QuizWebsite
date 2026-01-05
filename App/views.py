@@ -1,14 +1,27 @@
 from django.shortcuts import render,redirect
-from .models import AddQues
+from .models import AddQues,AddCategory
 
 def Admin(request):
     if request.method == 'POST':
-        category = request.POST.get('cat')
+        category = request.POST.get('CatName')
+        Description = request.POST.get('CatDes')
+        if category and Description:
+            AddCategory.objects.create(
+                CategoryName = category,
+                CategoryDescription = Description
+            )
+            
         return redirect(f'/Add/?category={category}')
-    return render(request,"Admin.html")
+    CatNameDes = AddCategory.objects.all()
+    return render(request,'Admin.html',{
+        'NamesDes' : CatNameDes
+    })
+
+
 
 def Add(request):   #AddQst
-    category = request.GET.get('category')
+    category_name= request.GET.get('category') or request.POST.get('category')
+    cat = AddCategory.objects.get(CategoryName='category') 
     if request.method == 'POST':
         ques = request.POST.get('question')
         op1 = request.POST.get('op1')
@@ -16,7 +29,7 @@ def Add(request):   #AddQst
         op3 = request.POST.get('op3')
         op4 = request.POST.get('op4')
         correct_answer =request.POST.get('CorrectAns')
-        category = request.POST.get('category')
+        
 
         if ques and op1 and op2 and op3 and op4:
             AddQues.objects.create(
@@ -26,12 +39,12 @@ def Add(request):   #AddQst
             op3 = op3,
             op4 = op4,
             correct = correct_answer,
-            category = category
+            category = cat
             )
-    QuestionAndOptions = AddQues.objects.filter(category=category)
+    QuestionAndOptions = AddQues.objects.filter(category=cat)
     return render(request, 'AddQst.html',{
         'QuestionAndOptions': QuestionAndOptions,
-        'category':category #ivde enthin ith venem
+        'category':category_name #ivde enthin ith venem
     })
 
 def User(request):
@@ -67,69 +80,8 @@ def TakeQuiz(request):
 
 def DeleteQues(request, id):
    i = AddQues.objects.get(id=id)
-   category = i.category
+   category = i.category.CategoryName
    i.delete()
    return redirect(f'/Add/?category={category}')
 
 
-
-
-    
-# def User(request):
-#     if request.method == 'POST':
-#         ques = request.POST.get('question')
-#         op1 = request.POST.get('op1')
-#         op2 = request.POST.get('op2')
-#         op3 = request.POST.get('op3')
-#         op4 = request.POST.get('op4')
-#         if ques and op1 and op2 and op3 and op4:
-#             AddQues.objects.create(
-#             Ques=ques,
-#             op1 = op1,
-#             op2 = op2,
-#             op3 = op3,
-#             op4 = op4
-#             )
-#             QuestionAndOptions = AddQues.objects.all()
-#     return render(request, 'User.html')
-    
-
-# from django.shortcuts import render,redirect
-# from .models import Add_Task
-
-
-# def home(request):
-#     if request.method == 'POST' :                   
-#         task = request.POST.get('task')             
-#         Add_Task.objects.create(task=task)
-#         return redirect('home')
-    
-#     #Retrieve part
-
-#     tasks = Add_Task.objects.all()  #fetch all records from member table
-
-#     #Render the form.html page and send the list of members to display in table
-#     return render(request, 'home.html', {'tasks': tasks})
-
-# def update_task(request, id):
-#     i = Add_Task.objects.get(id=id)
-#     if request.method == 'POST' :
-#         i.task = request.POST.get('task')
-#         i.save()
-#         return redirect('home')
-#     return render(request,'update.html',{'i': i})
-
-
-# def delete_task(request, id):
-#     i = Add_Task.objects.get(id=id)
-#     i.delete()
-#     return redirect('home')
-
-# def strike(text):
-#     return ''.join(char + '\u0336' for char in text)
-    
-# def strike_task(request,id):
-#     i = Add_Task.objects.get(id=id)
-#     i.task = strike(i.task)
-#     i.save()
-#     return redirect('home')
