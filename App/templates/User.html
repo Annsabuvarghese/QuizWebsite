@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/User.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <!-- <p>This is user html</p> -->
+
+        <a href="{% url 'User' %}">Home</a>
+
+    </nav>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="categoryDiv">
+            <h2>Python</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam incidunt eum necessitatibus
+                illo porro magnam sequi possimus
+                praesentium ad facilis dicta labore
+                nulla, alias consectetur pariatur sed nesciunt dolor quibusdam?</p>
+            <button type="submit" name="cat" value="Python">Python</button>
+        </div>
+
+        <div class="categoryDiv">
+            <h2>Java</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam incidunt eum necessitatibus
+                illo porro magnam sequi possimus
+                praesentium ad facilis dicta labore
+                nulla, alias consectetur pariatur sed nesciunt dolor quibusdam?</p>
+            <button type="submit" name="cat" value="Java">Java</button>
+
+        </div>
+    </form>
+</body>
+
+</html>
+
+<!-- admin registration django
+registration page
+  -for admin
+  -for user
+admin category+ description+add question+edit question add akkan pattanam 
+git il push cheyyanam
+bootstrap use akkanam
+user wrong akkiya question nte right answer kanikkanam
+
+-->
+

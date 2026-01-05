@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/Quiz.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="{% static 'js/script1.js' %}"></script>
+    <nav>
+        <!-- <p>This is user html</p> -->
+        <a href="{% url 'User' %}">Home</a>
+    </nav>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="category" value="{{ category }}">
+        {% for i in QuestionAndOptions %}
+        
+            <div id="Qbox">
+                <p><b>Question {{ forloop.counter }}</b></p>
+                <ul>
+                    <p>{{ i.Ques }}</p>
+                    <input type="radio" name="{{ i.id }}" value="op1">{{ i.op1 }}</button><br>
+                    <input type="radio" name="{{ i.id }}" value="op2">{{ i.op2 }} </button><br>
+                    <input type="radio" name="{{ i.id }}" value="op3">{{ i.op3 }}</button><br>
+                    <input type="radio" name="{{ i.id }}" value="op4">{{ i.op4 }}</button><br>
+                </ul>
+            </div>
+        
+
+        </div>
+        {% endfor %}
+        <input type="submit" onclick="ScoreDisplay()">
+    </form>
+    <div id="ScoreBoard">
+    <p>scored {{ score }}</p> out of <p>{{ totalQ }}</p>
+    </div>
+</body>
+
+</html>

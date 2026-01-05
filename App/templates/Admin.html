@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/Admin.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <!-- <p>This is Admin html</p> -->
+    <nav>
+        <a href="{% url 'Admin' %}">Admin</a>
+        <a href="{% url 'User' %}">Demo</a>
+    </nav>
+    <form method="POST">
+        {% csrf_token %}
+        <div id="CategoryDiv">
+            <h2>Python</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam incidunt eum necessitatibus
+                illo porro magnam sequi possimus
+                praesentium ad facilis dicta labore
+                nulla, alias consectetur pariatur sed nesciunt dolor quibusdam?</p>
+
+            <button type="submit" name="cat" value="Python">Add Questions</button>
+        </div>
+
+        <div id="CategoryDiv">
+            <h2>Java</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam incidunt eum necessitatibus
+                illo porro magnam sequi possimus
+                praesentium ad facilis dicta labore
+                nulla, alias consectetur pariatur sed nesciunt dolor quibusdam?</p>
+
+            <button type="submit" name="cat" value="Java">Add Questions</button>
+        </div>
+
+    </form>
+    <br><br>
+    <marquee behavior="" direction="left">
+        <footer>
+            <p>&copy; 2026 Quiz Web | All rights reserved.</p>
+        </footer>
+    </marquee>
+</body>
+
+</html>
