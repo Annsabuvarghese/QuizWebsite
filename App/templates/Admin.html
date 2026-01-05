@@ -15,7 +15,9 @@
     <!-- <p>This is Admin html</p> -->
     <nav>
         <a href="{% url 'Admin' %}">Admin</a>
-        <a href="{% url 'User' %}">Demo</a>
+        <a href="{% url 'User' %}">User</a>
+        <a href="{% url 'TakeQuiz' %}">Quiz</a>
+        <a href="{% url 'AddQst' %}">Quiz</a>
     </nav>
     <form method="POST">
         {% csrf_token %}
