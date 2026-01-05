@@ -25,9 +25,14 @@ function create() {
 
 // CreateCategory()
 function CreateCategory() {
-    document.getElementById("CategoryDiv").innerHTML =
-    "<input type='text' name='CatName' class='CatBox' placeholder='Enter the Category name here' required><br><br>" +
-    "<input type='text' name='CatDes' class='CatBox' placeholder='Enter the Category description here' required><br><br>" +
-    "<button type='submit'>Create Cat</button>";
+    const csrf = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
+    document.getElementById("CategoryDiv").innerHTML =
+    `<form method="POST">
+        <input type="hidden" name="csrfmiddlewaretoken" value="${csrf}">
+        <input type="text" name="CatName" placeholder="Category Name" required><br><br>
+        <input type="text" name="CatDes" placeholder="Description" required><br><br>
+        <button type="submit">Save Category</button>
+     </form>`;
 }
+

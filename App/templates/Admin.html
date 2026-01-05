@@ -19,11 +19,13 @@
         <a href="{% url 'TakeQuiz' %}">Quiz</a>
         <a href="{% url 'AddQst' %}?category=General">Add Questions</a>
     </nav>
-    <form method="POST">
+    <form method="POST" id="CategoryForm">
         {% csrf_token %}
-        <button type="submit" value="addcategory" onclick="CreateCategory()">Create Category</button>
         <!-- JS will inject category name & description inputs here -->
     </form>
+
+    <button type="submit" value="addcategory" onclick="CreateCategory()">Create Category</button>
+
     <div id="CategoryDiv">
 
     </div>

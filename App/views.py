@@ -5,6 +5,7 @@ def Admin(request):
     if request.method == 'POST':
         category = request.POST.get('CatName')
         Description = request.POST.get('CatDes')
+        
         if category and Description:
              cat, created = AddCategory.objects.get_or_create(
                 CategoryName = category,
