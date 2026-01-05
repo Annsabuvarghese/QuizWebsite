@@ -17,19 +17,30 @@
         <a href="{% url 'Admin' %}">Admin</a>
         <a href="{% url 'User' %}">User</a>
         <a href="{% url 'TakeQuiz' %}">Quiz</a>
-        <a href="{% url 'AddQst' %}">AddQst</a>
+        <a href="{% url 'AddQst' %}?category=General">Add Questions</a>
     </nav>
     <form method="POST">
         {% csrf_token %}
-        <button type="button" value="addcategory" onclick="CreateCategory()">Create Category</button>
-        <input type="hidden" name="category" value="{{ category }}">
+        <button type="submit" value="addcategory" onclick="CreateCategory()">Create Category</button>
+        <!-- JS will inject category name & description inputs here -->
     </form>
     <div id="CategoryDiv">
 
     </div>
-    { for }
+    <div id="CategoriesList">
+        {% for i in NamesDes %}
+        <div id="CatBox">
+            <p>{{ i.CategoryName }}</p>
+            <p>{{ i.CategoryDescription }}</p>
+            <!--URL becomes:/Add/?category=Python-->
 
+            <a href="{% url 'AddQst' %}?category={{ i.CategoryName }}">
+                <button type="button">Add Questions</button>
+            </a>
 
+        </div>
+        {% endfor %}
+    </div>
 
     <br><br>
     <marquee behavior="" direction="left">

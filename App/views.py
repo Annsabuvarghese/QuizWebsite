@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import AddQues,AddCategory
 
 def Admin(request):
@@ -6,12 +6,13 @@ def Admin(request):
         category = request.POST.get('CatName')
         Description = request.POST.get('CatDes')
         if category and Description:
-            AddCategory.objects.create(
+             cat, created = AddCategory.objects.get_or_create(
                 CategoryName = category,
-                CategoryDescription = Description
+                defaults={'CategoryDescription': Description}
             )
             
-        return redirect(f'/Add/?category={category}')
+             return redirect(f'/Add/?category={cat.CategoryName}')
+        return redirect('Admin')
     CatNameDes = AddCategory.objects.all()
     return render(request,'Admin.html',{
         'NamesDes' : CatNameDes
@@ -21,7 +22,10 @@ def Admin(request):
 
 def Add(request):   #AddQst
     category_name= request.GET.get('category') or request.POST.get('category')
-    cat = AddCategory.objects.get(CategoryName='category') 
+    if not category_name:
+        return redirect('Admin')
+    
+    cat = get_object_or_404(AddCategory, CategoryName=category_name)
     if request.method == 'POST':
         ques = request.POST.get('question')
         op1 = request.POST.get('op1')
@@ -31,7 +35,7 @@ def Add(request):   #AddQst
         correct_answer =request.POST.get('CorrectAns')
         
 
-        if ques and op1 and op2 and op3 and op4:
+        if ques and op1 and op2 and op3 and op4 and correct_answer:
             AddQues.objects.create(
             Ques=ques,
             op1 = op1,
@@ -41,20 +45,26 @@ def Add(request):   #AddQst
             correct = correct_answer,
             category = cat
             )
+        return redirect(f'/Add/?category={category_name}')
+
     QuestionAndOptions = AddQues.objects.filter(category=cat)
     return render(request, 'AddQst.html',{
         'QuestionAndOptions': QuestionAndOptions,
-        'category':category_name #ivde enthin ith venem
+        'category':category_name #ivde ith venem
     })
 
 def User(request):
     if request.method == 'POST':
         category = request.POST.get('cat')
+    if category:
         return redirect(f'/TakeQuiz/?category={category}')
     return render(request,"User.html")
 
 def TakeQuiz(request):
     category = request.GET.get('category') or request.POST.get('category')
+    if not category:
+        return redirect('User')
+    
     QuestionAndOptions = AddQues.objects.filter(category=category)
     totalQuestions = QuestionAndOptions.count()
     score = None

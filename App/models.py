@@ -2,7 +2,7 @@ from django.db import models
 
 class AddCategory(models.Model):
     CategoryName = models.CharField(max_length=100,unique=True,default='python')
-    CategoryDescription = models.TextField()
+    CategoryDescription = models.TextField(default="This is a computer programming language")
 
     def __str__(self):
         return self.CategoryName
