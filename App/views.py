@@ -5,14 +5,15 @@ def Admin(request):
     if request.method == 'POST':
         category = request.POST.get('CatName')
         Description = request.POST.get('CatDes')
-        
-        if category and Description:
-             cat, created = AddCategory.objects.get_or_create(
-                CategoryName = category,
-                defaults={'CategoryDescription': Description}
-            )
+
+        # CASE-INSENSITIVE check
+        if not AddCategory.objects.filter(CategoryName__iexact=category).exists():
+            AddCategory.objects.create(
+                CategoryName=category,
+                CategoryDescription=Description
+                )
             
-             return redirect(f'/Add/?category={cat.CategoryName}')
+            
         return redirect('Admin')
     CatNameDes = AddCategory.objects.all()
     return render(request,'Admin.html',{
