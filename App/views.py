@@ -56,12 +56,17 @@ def Add(request):   #AddQst
     })
 
 def User(request):
+    categoryandes = AddCategory.objects.all()
     category = None
+
     if request.method == 'POST':
         category = request.POST.get('cat')
     if category:
         return redirect(f'/TakeQuiz/?category={category}')
-    return render(request,"User.html")
+    return render(request,'User.html',{
+        'catinfo': categoryandes
+
+    })
 
 def TakeQuiz(request):
     category = request.GET.get('category') or request.POST.get('category')
@@ -81,8 +86,6 @@ def TakeQuiz(request):
             if UserAns == i.correct :
                 score += 1
             
-   
-
     return render(request, 'Quiz.html',{
         'QuestionAndOptions': QuestionAndOptions,
         'score' : score,

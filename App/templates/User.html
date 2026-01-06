@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/User.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/User.css' %}"> -->
     <title>Document</title>
 </head>
 
@@ -22,18 +22,15 @@
 
     <form method="POST">
         {% csrf_token %}
+        
         <div class="categoryDiv">
-            <h2></h2>
-            <p></p>
-            <button type="submit" name="cat" value=""></button>
+            {% for i in catinfo %}
+            
+            <h2>{{ i.CategoryName }}</h2>
+            <p>{{ i.CategoryDescription }}</p>
+            <button type="submit" name="" value="Take Quiz">Take Quiz</button>
         </div>
-
-        <div class="categoryDiv">
-            <h2></h2>
-            <p></p>
-            <button type="submit" name="cat" value=""></button>
-
-        </div>
+        {% endfor %}
     </form>
 </body>
 
