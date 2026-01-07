@@ -34,15 +34,15 @@
                     <input type="radio" name="{{ i.id }}" value="op4">{{ i.op4 }}</button><br>
                 </ul>
             </div>
-        
-
-        </div>
         {% endfor %}
-        <input type="submit" onclick="ScoreDisplay()">
+        <input type="submit" value="Submit Score">
     </form>
+
+    {% if score is not None %}
     <div id="ScoreBoard">
     <p>scored {{ score }}</p> out of <p>{{ totalQ }}</p>
     </div>
+    {% endif %}
 </body>
 
 </html>

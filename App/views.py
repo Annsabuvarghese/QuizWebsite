@@ -73,7 +73,8 @@ def TakeQuiz(request):
     if not category:
         return redirect('User')
     
-    QuestionAndOptions = AddQues.objects.filter(category=category)
+    cat_obj = get_object_or_404(AddCategory, CategoryName=category)
+    QuestionAndOptions = AddQues.objects.filter(category=cat_obj)
     totalQuestions = QuestionAndOptions.count()
     score = None
     CorrectAns = {}

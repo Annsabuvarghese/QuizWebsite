@@ -22,13 +22,16 @@
 
     <form method="POST">
         {% csrf_token %}
-        
+
         <div class="categoryDiv">
             {% for i in catinfo %}
-            
+
             <h2>{{ i.CategoryName }}</h2>
             <p>{{ i.CategoryDescription }}</p>
-            <button type="submit" name="" value="Take Quiz">Take Quiz</button>
+            <button type="submit" name="cat" value="{{ i.CategoryName }}">
+                Take Quiz
+            </button>
+
         </div>
         {% endfor %}
     </form>
@@ -46,4 +49,3 @@ bootstrap use akkanam
 user wrong akkiya question nte right answer kanikkanam
 
 -->
-
