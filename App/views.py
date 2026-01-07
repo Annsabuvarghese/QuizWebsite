@@ -102,3 +102,42 @@ def DeleteQues(request, id):
    return redirect(f'/Add/?category={category}')
 
 
+def EditQues(request,id):
+    category = request.GET.get('category') or request.POST.get('category')
+    if not category:
+        return redirect('Add')
+    
+    cat_obj = get_object_or_404(AddCategory, CategoryName=category)
+    i = AddQues.objects.get(id=id)
+
+    if request.method=='POST':
+        i.Ques = request.POST.get('question')
+        i.op1 = request.POST.get('op1')
+        i.op2 = request.POST.get('op2')
+        i.op3 = request.POST.get('op3')
+        i.op4 = request.POST.get('op4')
+
+        correct_key = request.POST.get('CorrectAns')
+
+        if correct_key == 'op1':
+            i.correct = i.op1
+        elif correct_key == 'op2':
+            i.correct = i.op2
+        elif correct_key == 'op3':
+            i.correct = i.op3
+        elif correct_key == 'op4':
+            i.correct = i.op4
+
+        i.save()   
+        return redirect(f'/Add/?category={category}')
+    return render(request, 'update.html',{
+        'i' : i
+    })
+
+# def update_task(request, id):
+#     i = Add_Task.objects.get(id=id)
+#     if request.method == 'POST' :
+#         i.task = request.POST.get('task')
+#         i.save()
+#         return redirect('home')
+#     return render(request,'update.html',{'i': i})

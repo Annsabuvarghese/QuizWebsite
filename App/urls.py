@@ -7,4 +7,5 @@ urlpatterns = [
    path('Add/', views.Add, name='AddQst'),
    path('TakeQuiz/',views.TakeQuiz,name='TakeQuiz'),
    path('delete/<int:id>/',views.DeleteQues,name='Delete11'),
+   path('edit/<int:id>/',views.EditQues,name='Edit11'),
 ]

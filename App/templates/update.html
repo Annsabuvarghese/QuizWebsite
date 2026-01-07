@@ -1,0 +1,34 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Update Task</h2>
+        <input type="text" name="question" value="{{ i.Ques }}"><br><br>
+       
+        <input type="radio" name="CorrectAns" value="op1"
+        {% if i.correct == i.op1 %}checked{% endif %}>
+        <input type="text" name="op1"  value="{{ i.op1 }}"><br><br>
+
+        <input type="radio" name="CorrectAns" value="op1"
+        {% if i.correct == i.op1 %}checked{% endif %}>
+        <input type="text" name="op2"  value="{{ i.op2 }}"><br><br>
+
+        <input type="radio" name="CorrectAns" value="op1"
+        {% if i.correct == i.op1 %}checked{% endif %}>
+        <input type="text" name="op1"  value="{{ i.op3 }}"><br><br>
+
+
+        <input type="radio" name="CorrectAns" value="op1"
+        {% if i.correct == i.op1 %}checked{% endif %}>
+        <input type="text" name="op1"  value="{{ i.op4 }}"><br><br>
+
+       
+    </form>
+</body>
+</html>
