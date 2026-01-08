@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import AddQues,AddCategory
+from .models import AddQues,AddCategory,UserRegister
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password
 
 def Admin(request):
     if request.method == 'POST':
@@ -110,6 +112,7 @@ def EditQues(request,id):
     cat_obj = get_object_or_404(AddCategory, CategoryName=category)
     i = AddQues.objects.get(id=id)
 
+   
     if request.method=='POST':
         i.Ques = request.POST.get('question')
         i.op1 = request.POST.get('op1')
@@ -117,27 +120,49 @@ def EditQues(request,id):
         i.op3 = request.POST.get('op3')
         i.op4 = request.POST.get('op4')
 
-        correct_key = request.POST.get('CorrectAns')
+       
 
-        if correct_key == 'op1':
-            i.correct = i.op1
-        elif correct_key == 'op2':
-            i.correct = i.op2
-        elif correct_key == 'op3':
-            i.correct = i.op3
-        elif correct_key == 'op4':
-            i.correct = i.op4
-
+        i.correct = request.POST.get('CorrectAns')
         i.save()   
         return redirect(f'/Add/?category={category}')
     return render(request, 'update.html',{
         'i' : i
     })
 
-# def update_task(request, id):
-#     i = Add_Task.objects.get(id=id)
-#     if request.method == 'POST' :
-#         i.task = request.POST.get('task')
-#         i.save()
-#         return redirect('home')
-#     return render(request,'update.html',{'i': i})
+
+def UserReg(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        place = request.POST.get('place')
+        email = request.POST.get('email')
+        education = request.POST.get('education')
+        dob = request.POST.get('dob')
+        photo = request.FILES.get('photo')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+
+        # password match check
+        if password != confirm_password:
+            messages.error(request, "Passwords do not match")
+            return redirect('register')
+
+        # email already exists check
+        if UserRegister.objects.filter(email=email).exists():
+            messages.error(request, "Email already registered")
+            return redirect('register')
+
+        user = UserRegister(
+            name=name,
+            place=place,
+            email=email,
+            education=education,
+            dob=dob,
+            photo=photo,
+            password=make_password(password)  # password hashed
+        )
+        user.save()
+
+        messages.success(request, "Registration successful")
+        return redirect('UserReg')
+
+    return render(request, 'UserReg.html')

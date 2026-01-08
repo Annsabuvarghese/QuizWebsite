@@ -1,34 +1,109 @@
- <!DOCTYPE html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>update</title>
+    <style>
+.green {
+    color: green;
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+    font-weight: bold;
+}
+</style>
+
 </head>
 <body>
-    <form method="POST">
+    <!-- <form method="POST">
         {% csrf_token %}
         <h2>Update Task</h2>
         <input type="text" name="question" value="{{ i.Ques }}"><br><br>
        
         <input type="radio" name="CorrectAns" value="op1"
-        {% if i.correct == i.op1 %}checked{% endif %}>
+        {% if i.correct == "op1" %}checked{% endif %}>
         <input type="text" name="op1"  value="{{ i.op1 }}"><br><br>
 
-        <input type="radio" name="CorrectAns" value="op1"
-        {% if i.correct == i.op1 %}checked{% endif %}>
+        <input type="radio" name="CorrectAns" value="op2"
+        {% if i.correct == "op2" %}checked{% endif %}>
         <input type="text" name="op2"  value="{{ i.op2 }}"><br><br>
 
-        <input type="radio" name="CorrectAns" value="op1"
-        {% if i.correct == i.op1 %}checked{% endif %}>
-        <input type="text" name="op1"  value="{{ i.op3 }}"><br><br>
+        <input type="radio" name="CorrectAns" value="op3"
+        {% if i.correct == "op3" %}checked{% endif %}>
+        <input type="text" name="op3"  value="{{ i.op3 }}"><br><br>
 
 
-        <input type="radio" name="CorrectAns" value="op1"
-        {% if i.correct == i.op1 %}checked{% endif %}>
-        <input type="text" name="op1"  value="{{ i.op4 }}"><br><br>
+        <input type="radio" name="CorrectAns" value="op4"
+        {% if i.correct == "op4" %}checked{% endif %}>
+        <input type="text" name="op4"  value="{{ i.op4 }}"><br><br>
 
-       
-    </form>
+        <button type="submit">Submit</button>
+    </form> -->
+
+    <form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="qid" value="{{ q.id }}">
+
+    <!-- OPTION 1 -->
+    <label class="
+        {% if submitted %}
+            {% if correct_answer == 'op1' %}green
+            {% elif user_answer == 'op1' and correct_answer != 'op1' %}red
+            {% endif %}
+        {% endif %}
+    ">
+        <input type="radio" name="answer" value="op1"
+        {% if user_answer == 'op1' %}checked{% endif %}>
+        {{ q.op1 }}
+    </label><br>
+
+    <!-- OPTION 2 -->
+    <label class="
+        {% if submitted %}
+            {% if correct_answer == 'op2' %}green
+            {% elif user_answer == 'op2' and correct_answer != 'op2' %}red
+            {% endif %}
+        {% endif %}
+    ">
+        <input type="radio" name="answer" value="op2"
+        {% if user_answer == 'op2' %}checked{% endif %}>
+        {{ q.op2 }}
+    </label><br>
+
+    <!-- OPTION 3 -->
+    <label class="
+        {% if submitted %}
+            {% if correct_answer == 'op3' %}green
+            {% elif user_answer == 'op3' and correct_answer != 'op3' %}red
+            {% endif %}
+        {% endif %}
+    ">
+        <input type="radio" name="answer" value="op3"
+        {% if user_answer == 'op3' %}checked{% endif %}>
+        {{ q.op3 }}
+    </label><br>
+
+    <!-- OPTION 4 -->
+    <label class="
+        {% if submitted %}
+            {% if correct_answer == 'op4' %}green
+            {% elif user_answer == 'op4' and correct_answer != 'op4' %}red
+            {% endif %}
+        {% endif %}
+    ">
+        <input type="radio" name="answer" value="op4"
+        {% if user_answer == 'op4' %}checked{% endif %}>
+        {{ q.op4 }}
+    </label><br><br>
+
+    {% if not submitted %}
+        <button type="submit">Submit</button>
+    {% endif %}
+</form>
+
 </body>
 </html>

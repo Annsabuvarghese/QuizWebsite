@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'Admin' %}">Admin</a>
+        <a href="{% url 'User' %}">User</a>
+        <a href="{% url 'TakeQuiz' %}">Quiz</a>
+        <a href="{% url 'AddQst' %}?category=General">Add Questions</a>
+    </nav>
+    <!-- name
+    place
+    email
+    education qualification
+    specify btech,diploma
+    age
+    photo
+    password 
+    confirm password -->
+
+    <form method="POST">
+    {% csrf_token %}
+
+    Name:<br>
+    <input type="text" name="name"><br><br>
+
+    Place:<br>
+    <input type="text" name="place"><br><br>
+
+    Email:<br>
+    <input type="email" name="email"><br><br>
+
+    Education Qualification:<br>
+    <input type="text" name="education"><br><br>
+
+    DOB:<br>
+    <input type="date" name="dob"><br><br>
+
+    Photo:<br>
+    <input type="file" name="photo"><br><br>
+
+    Password:<br>
+    <input type="password" name="password"><br><br>
+
+    Confirm Password:<br>
+    <input type="password" name="confirm_password"><br><br>
+
+    <input type="submit" value="Register">
+</form>
+    
+    
+</body>
+</html>
