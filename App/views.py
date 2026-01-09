@@ -13,6 +13,14 @@ from django.contrib.auth.hashers import make_password,check_password
 #     else:
 #         # Not logged in → go to registration page
 #         return redirect('UserReg')
+def Home2(request):
+    return render(request,"Home2.html")
+
+def Contact(request):
+    return render(request,"Contact.html")
+
+def About(request):
+    return render(request,"About.html")
 
 def Admin(request):
     if request.method == 'POST':

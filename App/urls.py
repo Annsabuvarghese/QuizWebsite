@@ -5,10 +5,13 @@ from django.conf import settings
 
 urlpatterns = [
    # path('',views.home,name='home'),
+   path('',views.Home2,name='Home2'),
    path('',views.Admin,name='Admin'),
    path('User/',views.User,name='User'),
    path('Reg/',views.UserReg,name='UserReg'),
    path('Add/', views.Add, name='AddQst'),
+   path('Contact/', views.Contact, name='Contact'),
+   path('About/', views.About, name='About'),
    path('TakeQuiz/',views.TakeQuiz,name='TakeQuiz'),
    path('delete/<int:id>/',views.DeleteQues,name='Delete11'),
    path('edit/<int:id>/',views.EditQues,name='EditQues'),
