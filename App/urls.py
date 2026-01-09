@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+   # path('',views.home,name='home'),
    path('',views.Admin,name='Admin'),
    path('User/',views.User,name='User'),
    path('Reg/',views.UserReg,name='UserReg'),
@@ -15,4 +16,6 @@ urlpatterns = [
    path('UpdateCat/<int:id>/', views.UpdateCat, name='UpdateCat'),
    path('UpdateUser/<int:id>/', views.UpdateUser, name='UpdateUser'),
    path('DisplayUser/<int:id>/', views.DisplayUser, name='DisplayUser'),
+   path('Login/', views.UserLogin, name='UserLogin'),
+   path('Logout/', views.UserLogout, name='UserLogout')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

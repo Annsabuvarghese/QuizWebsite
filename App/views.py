@@ -1,8 +1,18 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import AddQues,AddCategory,UserRegister,UserScore
 from django.contrib import messages
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password,check_password
 
+# def home(request):
+#     if request.user.is_authenticated and request.user.is_superuser:
+#         # Superuser → go to Django admin panel
+#         return redirect('/admin/')
+#     elif request.session.get('user_id'):
+#         # Normal user → logged in via your UserRegister system
+#         return redirect('User')
+#     else:
+#         # Not logged in → go to registration page
+#         return redirect('UserReg')
 
 def Admin(request):
     if request.method == 'POST':
