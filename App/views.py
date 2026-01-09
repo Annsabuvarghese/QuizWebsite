@@ -13,8 +13,19 @@ from django.contrib.auth.hashers import make_password,check_password
 #     else:
 #         # Not logged in → go to registration page
 #         return redirect('UserReg')
+
+# def home(request):
+#     categories = Category.objects.all()  # Fetch all categories
+#     context = {
+#         'categories': categories
+#     }
+#     return render(request, 'home.html', context)
+
 def Home2(request):
-    return render(request,"Home2.html")
+    CatDEs = AddCategory.objects.all()
+    return render(request,'Home2.html',{
+        'CatDes' : CatDEs
+    })
 
 def Contact(request):
     return render(request,"Contact.html")

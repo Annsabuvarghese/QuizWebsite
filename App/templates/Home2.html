@@ -9,12 +9,39 @@
 <body>
     <nav>
         <a href="{% url 'Admin' %}">Admin</a>
+        <a href="{% url 'Contact' %}">Contact</a>
+        <a href="{% url 'About' %}">About</a>
         <!-- <a href="{% url 'User' %}">User</a> -->
         <!-- <a href="{% url 'TakeQuiz' %}">Quiz</a> -->
         <!-- <a href="{% url 'UserReg' %}">User Reg</a> -->
-        <a href="{% url 'UserLogin' %}">User Login</a>
+        <a href="{% url 'UserLogin' %}">Login</a>
         <!-- <a href="{% url 'AddQst' %}?category=General">Add Questions</a> -->
     </nav>
+    
+    <div id="IntroBox">
+        <p>
+        Welcome to QuizMaster – your ultimate platform for testing and improving your programming knowledge! 
+        Whether you are a beginner learning the basics or an experienced coder aiming to sharpen your skills, 
+        QuizMaster provides a wide range of quizzes in multiple programming languages and concepts.
+
+        Challenge yourself with timed quizzes, 
+        explore different difficulty levels, and track your progress over time. 
+        Our interactive platform not only helps you identify your strengths and weaknesses but also motivates you to learn consistently.
+
+        Join our community of coding enthusiasts, compete with peers, and take your programming skills to the next level. 
+        Start quizzing today and transform your knowledge into real coding mastery!"*
+        </p>
+    </div>
+    <div id="cat">
+         {% for i in CatDes %}
+        <div class="category-card">
+            <h2>{{ i.CategoryName }}</h2>
+            <p>{{ i.CategoryDescription }}</p>
+            <a href="{% url 'UserLogin' %}">Take Quiz</a>
+        </div>
+         {% endfor %}
+    </div>
+    <a href="{% url 'UserReg' %}"><button>Register For FREE</button></a>
     
 </body>
 </html>
