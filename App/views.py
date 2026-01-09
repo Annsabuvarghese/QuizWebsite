@@ -133,7 +133,6 @@ def EditQues(request,id):
 def UserReg(request):
     if request.method == 'POST':
         name = request.POST.get('name')
-        place = request.POST.get('place')
         email = request.POST.get('email')
         education = request.POST.get('education')
         dob = request.POST.get('dob')
@@ -144,16 +143,15 @@ def UserReg(request):
         # password match check
         if password != confirm_password:
             messages.error(request, "Passwords do not match")
-            return redirect('register')
+            return redirect('UserReg')
 
         # email already exists check
         if UserRegister.objects.filter(email=email).exists():
             messages.error(request, "Email already registered")
-            return redirect('register')
+            return redirect('UserReg')
 
         user = UserRegister(
             name=name,
-            place=place,
             email=email,
             education=education,
             dob=dob,

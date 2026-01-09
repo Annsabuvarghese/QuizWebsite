@@ -22,14 +22,11 @@
     password 
     confirm password -->
 
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
     Name:<br>
     <input type="text" name="name"><br><br>
-
-    Place:<br>
-    <input type="text" name="place"><br><br>
 
     Email:<br>
     <input type="email" name="email"><br><br>
