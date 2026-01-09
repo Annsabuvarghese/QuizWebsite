@@ -39,7 +39,11 @@
             <a href="{% url 'AddQst' %}?category={{ i.CategoryName }}">
                 <button type="button">Add Questions</button>
             </a>
-
+            <a href="{% url 'UpdateCat' i.id %}?category={{ category }}">
+            <button>Edit</button>
+            <a href="{% url 'DeleteCat' i.id %}"
+                onclick="return confirm('Are you sure you want to delete this Category?');"><button>Delete</button></a>
+            
         </div>
         {% endfor %}
     </div>

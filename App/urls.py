@@ -11,5 +11,8 @@ urlpatterns = [
    path('TakeQuiz/',views.TakeQuiz,name='TakeQuiz'),
    path('delete/<int:id>/',views.DeleteQues,name='Delete11'),
    path('edit/<int:id>/',views.EditQues,name='EditQues'),
-
+   path('DeleteCat/<int:id>/', views.DeleteCat, name='DeleteCat'),
+   path('UpdateCat/<int:id>/', views.UpdateCat, name='UpdateCat'),
+   path('UpdateUser/<int:id>/', views.UpdateUser, name='UpdateUser'),
+   path('DisplayUser/<int:id>/', views.DisplayUser, name='DisplayUser'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

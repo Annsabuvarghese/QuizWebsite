@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="{% static 'css/Quiz.css' %}">
+</head>
+<body>
+    <h2>My Profile</h2>
+
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Education:</strong> {{ user.education }}</p>
+    <p><strong>Date of Birth:</strong> {{ user.dob }}</p>
+    {% if user.photo %}
+        <p><strong>Photo:</strong> <br> <img src="{{ user.photo.url }}" alt="User Photo"></p>
+    {% endif %}
+
+    <h3>My Quiz Scores</h3>
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Score</th>
+            <th>Total Questions</th>
+            <th>Date</th>
+        </tr>
+        {% for score in user.userscore_set.all %}
+        <tr>
+            <td>{{ score.category.CategoryName }}</td>
+            <td>{{ score.score }}</td>
+            <td>{{ score.total_questions }}</td>
+            <td>{{ score.date|date:"d M Y H:i" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No quiz attempts yet.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="{% url 'UpdateUser' %}">Edit Profile</a>
+</body>
+</html>

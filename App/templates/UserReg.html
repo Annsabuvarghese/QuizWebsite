@@ -26,25 +26,25 @@
     {% csrf_token %}
 
     Name:<br>
-    <input type="text" name="name"><br><br>
+    <input type="text" name="name" required><br><br>
 
     Email:<br>
-    <input type="email" name="email"><br><br>
+    <input type="email" name="email" required><br><br>
 
     Education Qualification:<br>
-    <input type="text" name="education"><br><br>
+    <input type="text" name="education" required><br><br>
 
     DOB:<br>
-    <input type="date" name="dob"><br><br>
+    <input type="date" name="dob" required><br><br>
 
     Photo:<br>
-    <input type="file" name="photo"><br><br>
+    <input type="file" name="photo" required><br><br>
 
     Password:<br>
-    <input type="password" name="password"><br><br>
+    <input type="password" name="password" required><br><br>
 
     Confirm Password:<br>
-    <input type="password" name="confirm_password"><br><br>
+    <input type="password" name="confirm_password" required><br><br>
 
     <input type="submit" value="Register">
 </form>

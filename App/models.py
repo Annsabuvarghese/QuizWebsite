@@ -28,3 +28,8 @@ class UserRegister(models.Model):
     def __str__(self):
         return self.name
     
+class UserScore(models.Model):
+    user = models.ForeignKey("UserRegister", on_delete=models.CASCADE)
+    category = models.ForeignKey(AddCategory, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    
