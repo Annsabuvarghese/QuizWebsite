@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 
 class AddCategory(models.Model):
@@ -30,7 +29,10 @@ class UserRegister(models.Model):
         return self.name
     
 class UserScore(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserRegister, on_delete=models.CASCADE)
     category = models.ForeignKey(AddCategory, on_delete=models.CASCADE)
     score = models.IntegerField()
+    total_questions = models.IntegerField(default=10)
 
+    def __str__(self):
+        return f"{self.user.name} - {self.score}/{self.total_questions}"

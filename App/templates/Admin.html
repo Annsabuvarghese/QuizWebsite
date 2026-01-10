@@ -13,12 +13,14 @@
 
     <!-- <p>This is Admin html</p> -->
     <nav>
-        <a href="{% url 'Admin' %}">Admin</a>
-        <a href="{% url 'User' %}">User</a>
+        <a href="{% url 'Home2' %}">Home</a>
+        <!-- <a href="{% url 'Admin' %}">Admin</a> -->
+        <a href="{% url 'UserReg' %}">RegisterAsUser</a>
+        <!-- <a href="{% url 'User' %}">User</a>
         <a href="{% url 'TakeQuiz' %}">Quiz</a>
-        <a href="{% url 'UserReg' %}">User Reg</a>
-         <a href="{% url 'UserLogin' %}">User Reg</a>
-        <a href="{% url 'AddQst' %}?category=General">Add Questions</a>
+        <a href="{% url 'UserReg' %}">User Reg</a> -->
+        <!-- <a href="{% url 'UserLogin' %}">User Reg</a> -->
+        <!-- <a href="{% url 'AddQst' %}?category=General">Add Questions</a> -->
     </nav>
     <form method="POST" id="CategoryForm">
         {% csrf_token %}
@@ -48,7 +50,7 @@
         </div>
         {% endfor %}
     </div>
-
+        <a href="{% url 'UserReg' %}"><button>Register as a user</button></a>
     <br><br>
     <marquee behavior="" direction="left">
         <footer>

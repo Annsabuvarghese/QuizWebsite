@@ -123,7 +123,9 @@ def TakeQuiz(request):
             CorrectAns[i.id] = i.correct
             if UserAns == i.correct :
                 score += 1
-        user = request.user
+
+        user_id = request.session.get('user_id')
+        user = get_object_or_404(UserRegister, id=user_id)
 
         UserScore.objects.create(
             user = user,
@@ -225,11 +227,21 @@ def UserReg(request):
 
         print("Redirecting to User page...")
         messages.success(request, "Registration successful")
-        return redirect('User')
-    return render(request, 'UserReg.html')
+        return redirect('UserReg')
+    return render(request, 'DisplayUser.html',{
+    'user_id': request.session.get('user_id')
+    })
 
 def UpdateUser(request, id):
-    i = get_object_or_404(UserRegister, id=id)
+    session_user_id = request.session.get('user_id')
+
+    if not session_user_id:
+        return redirect('UserReg')
+
+    if session_user_id != id:
+        return redirect('User')  
+    
+    i = get_object_or_404(UserRegister, id=session_user_id)
 
     if request.method == 'POST':
         i.name = request.POST.get('name')
@@ -242,17 +254,24 @@ def UpdateUser(request, id):
             i.photo = request.FILES.get('photo')
 
         i.save()
-        return redirect('Admin')
+        return redirect('DisplayUser', id=i.id)
 
     return render(request, 'edit_user.html', {
         'i': i
     })
 
 def DisplayUser(request, id):
-    i = get_object_or_404(UserRegister, id=id)
-    return render(request, 'DisplayUser.html', {
-        'user': i
-    })
+    session_user_id = request.session.get('user_id')
+    if not session_user_id:
+        return redirect('UserReg')
+
+    session_user_id = int(session_user_id)
+
+    if session_user_id != id:
+        return redirect('User')  # block illegal access
+
+    user = get_object_or_404(UserRegister, id=session_user_id)
+    return render(request, 'DisplayUser.html', {'user': user})
 
 def UserLogin(request):
     if request.method == 'POST':
@@ -262,10 +281,10 @@ def UserLogin(request):
         try:
             user = UserRegister.objects.get(email=email)
             if check_password(password, user.password):
-                # Save user in session
+                
                 request.session['user_id'] = user.id
                 messages.success(request, f"Welcome back, {user.name}!")
-                return redirect('User')  # go to user dashboard
+                return redirect('User')  
             else:
                 messages.error(request, "Incorrect password")
         except UserRegister.DoesNotExist:
@@ -278,6 +297,6 @@ def UserLogin(request):
 
 # LOGOUT
 def UserLogout(request):
-    request.session.flush()  # remove all session data
+    request.session.flush()  
     messages.success(request, "Logged out successfully")
     return redirect('UserLogin')
