@@ -12,11 +12,12 @@
 <body>
     <script src="{% static 'js/script1.js' %}"></script>
     <nav>
-        <!-- <p>This is user html</p> -->
-        <a href="{% url 'Admin' %}">Admin</a>
-        <a href="{% url 'User' %}">User</a>
-        <a href="{% url 'TakeQuiz' %}">Quiz</a>
-        <a href="{% url 'AddQst' %}?category=General">Add Questions</a>
+
+
+        <a href="{% url 'User' %}">Home</a>
+        <a href="{% url 'DisplayUser' user.id %}">My Profile</a>
+        <a href="{% url 'Contact' %}">Contact</a>
+        <a href="{% url 'About' %}">About</a>
     </nav>
 
     <form method="POST">

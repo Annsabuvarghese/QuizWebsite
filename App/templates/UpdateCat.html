@@ -5,7 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/update.css' %}">
 </head>
+    <nav>
+        <a href="{% url 'Home2' %}">Home</a>
+        <a href="{% url 'UserReg' %}">Register As User</a>
+    </nav>
 <body>
     <form method="POST">
     {% csrf_token %}

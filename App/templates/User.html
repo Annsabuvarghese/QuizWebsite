@@ -5,32 +5,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="{% static 'css/User.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'css/home2.css' %}">
     <title>Document</title>
 </head>
 
 <body>
     <nav>
-        <p>This is user html</p>
-
-        <a href="{% url 'Home2' %}">Home</a>
-        <!-- <a href="{% url 'Admin' %}">Admin</a> -->
-        <!-- <a href="{% url 'User' %}">User</a> -->
-        <!-- <a href="{% url 'TakeQuiz' %}">Quiz</a> -->
-        <!-- <a href="{% url 'AddQst' %}?category=General">Add Questions</a> -->
+        <a href="{% url 'User' %}">Home</a>
         <a href="{% url 'Contact' %}">Contact</a>
         <a href="{% url 'About' %}">About</a>
         <a href="{% url 'DisplayUser' user.id %}">My Profile</a>
-
-        
-
     </nav>
+    <div id="IntroBox">
+        <p>
+        Welcome to QuizMaster – your ultimate platform for testing and improving your programming knowledge! 
+        Whether you are a beginner learning the basics or an experienced coder aiming to sharpen your skills, 
+        QuizMaster provides a wide range of quizzes in multiple programming languages and concepts.
 
+        Challenge yourself with timed quizzes, 
+        explore different difficulty levels, and track your progress over time. 
+        Our interactive platform not only helps you identify your strengths and weaknesses but also motivates you to learn consistently.
+
+        Join our community of coding enthusiasts, compete with peers, and take your programming skills to the next level. 
+        Start quizzing today and transform your knowledge into real coding mastery!"*
+        </p>
+    </div>
     <form method="POST">
         {% csrf_token %}
-
+        {% for i in catinfo %}
         <div class="categoryDiv">
-            {% for i in catinfo %}
 
             <h2>{{ i.CategoryName }}</h2>
             <p>{{ i.CategoryDescription }}</p>
@@ -42,16 +45,4 @@
         {% endfor %}
     </form>
 </body>
-
 </html>
-
-<!-- admin registration django
-registration page
-  -for admin
-  -for user
-admin category+ description+add question+edit question add akkan pattanam 
-git il push cheyyanam
-bootstrap use akkanam
-user wrong akkiya question nte right answer kanikkanam
-
--->

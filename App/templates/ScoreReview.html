@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Review - {{ category }}</title>
+    <link rel="stylesheet" href="{% static 'css/review.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Quiz Review</h1>
+            <h2>Category: {{ category }}</h2>
+            <div class="score-card">
+                <strong>Your Score:</strong> {{ score }} / {{ totalQ }}
+            </div>
+        </div>
+
+        {% for i in review_data %}
+        <div class="question-card {% if i.user_answer == i.correct_answer %}correct-border{% else %}wrong-border{% endif %}">
+            
+            <p class="question-text">
+                <strong>Q{{ forloop.counter }}:</strong> {{ i.question }}
+            </p>
+
+            <p class="section-title">Options:</p>
+            <ul class="options-list">
+                <li>1. {{ i.options.op1 }}</li>
+                <li>2. {{ i.options.op2 }}</li>
+                <li>3. {{ i.options.op3 }}</li>
+                <li>4. {{ i.options.op4 }}</li>
+            </ul>
+
+            <div class="answer-section">
+                <p>
+                    <strong>Your Answer:</strong> 
+                    <span class="{% if i.user_answer == i.correct_answer %}text-success{% else %}text-danger{% endif %}">
+                        {{ i.user_answer }}
+                    </span>
+                </p>
+                <p>
+                    <strong>Correct Answer:</strong> 
+                    <span class="text-success">{{ i.correct_answer }}</span>
+                </p>
+            </div>
+        </div>
+        {% empty %}
+        <div class="question-card">
+            <p class="empty-msg">No questions found for this review.</p>
+        </div>
+        {% endfor %}
+
+        <div class="footer">
+            <a href="{% url 'User' %}" class="back-btn">Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+</html>

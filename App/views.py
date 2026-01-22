@@ -88,6 +88,10 @@ def Add(request):   #AddQst
     })
 
 def User(request):
+
+    if not request.session.get('user_id'):
+        return redirect('UserLogin')
+
     categoryandes = AddCategory.objects.all()
     category = None
 
@@ -118,14 +122,29 @@ def TakeQuiz(request):
 
     if request.method=='POST':
         score = 0
+        Review = [] #list
         for i in QuestionAndOptions:
             UserAns = request.POST.get(str(i.id))
             CorrectAns[i.id] = i.correct
             if UserAns == i.correct :
                 score += 1
 
+            Review.append({
+                'question': i.Ques,
+                'user_answer': UserAns,
+                'correct_answer': i.correct,
+                'options': {
+                    'op1': i.op1,
+                    'op2': i.op2,
+                    'op3': i.op3,
+                    'op4': i.op4,
+                }
+            })
+
         user_id = request.session.get('user_id')
         user = get_object_or_404(UserRegister, id=user_id)
+    
+
 
         UserScore.objects.create(
             user = user,
@@ -133,13 +152,17 @@ def TakeQuiz(request):
             score = score,
             total_questions=totalQuestions
         )
+        return render(request, 'ScoreReview.html', {
+            'review_data': Review,
+            'score': score,
+            'totalQ': totalQuestions,
+            'category': category
+        })
+
 
             
     return render(request, 'Quiz.html',{
         'QuestionAndOptions': QuestionAndOptions,
-        'score' : score,
-        'totalQ' : totalQuestions,
-        'Ans' : CorrectAns,
         'category':category
     })
 
@@ -155,8 +178,7 @@ def EditQues(request,id):
     if not category:
         return redirect('Add')
     
-    cat_obj = get_object_or_404(AddCategory, CategoryName=category)
-    i = AddQues.objects.get(id=id)
+    i = get_object_or_404(AddQues, id=id)
 
    
     if request.method=='POST':
@@ -172,7 +194,8 @@ def EditQues(request,id):
         i.save()   
         return redirect(f'/Add/?category={category}')
     return render(request, 'update.html',{
-        'i' : i
+        'i' : i,
+        'category': category
     })
 
 def DeleteCat(request, id):
@@ -214,7 +237,7 @@ def UserReg(request):
             messages.error(request, "Email already registered")
             return redirect('UserReg')
 
-        user = UserRegister(
+        user = UserRegister.objects.create(
             name=name,
             email=email,
             education=education,
@@ -227,10 +250,8 @@ def UserReg(request):
 
         print("Redirecting to User page...")
         messages.success(request, "Registration successful")
-        return redirect('UserReg')
-    return render(request, 'DisplayUser.html',{
-    'user_id': request.session.get('user_id')
-    })
+        return redirect('DisplayUser', id=user.id)
+    return render(request, 'UserReg.html')
 
 def UpdateUser(request, id):
     session_user_id = request.session.get('user_id')
@@ -256,21 +277,27 @@ def UpdateUser(request, id):
         i.save()
         return redirect('DisplayUser', id=i.id)
 
-    return render(request, 'edit_user.html', {
+    return render(request, 'UpdateUser.html', {
         'i': i
     })
 
 def DisplayUser(request, id):
     session_user_id = request.session.get('user_id')
-    if not session_user_id:
-        return redirect('UserReg')
 
+    # Not logged in
+    if not session_user_id:
+        return redirect('UserLogin')
+
+    # Convert to int (important)
     session_user_id = int(session_user_id)
 
+    # Prevent viewing other users
     if session_user_id != id:
-        return redirect('User')  # block illegal access
+        return redirect('DisplayUser', id=session_user_id)
 
+    # Fetch user AFTER checks
     user = get_object_or_404(UserRegister, id=session_user_id)
+
     return render(request, 'DisplayUser.html', {'user': user})
 
 def UserLogin(request):
@@ -289,7 +316,7 @@ def UserLogin(request):
                 messages.error(request, "Incorrect password")
         except UserRegister.DoesNotExist:
             messages.error(request, "User not found. Please register first.")
-        
+       
         return redirect('UserLogin')
     
     return render(request, 'UserLogin.html')
@@ -300,3 +327,11 @@ def UserLogout(request):
     request.session.flush()  
     messages.success(request, "Logged out successfully")
     return redirect('UserLogin')
+
+def MyProfile(request):
+    user_id = request.session.get('user_id')
+
+    if not user_id:
+        return redirect('UserLogin')
+
+    return redirect('DisplayUser', id=user_id)

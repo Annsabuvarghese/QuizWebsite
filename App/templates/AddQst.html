@@ -12,33 +12,23 @@
 <body>
     <script src="{% static 'js/script1.js' %}"></script>
 
+    <nav>
+        <a href="{% url 'Home2' %}">Home</a>
+        <a href="{% url 'UserReg' %}">Register As User</a>
+    </nav>
 
-    <!-- <p>this is add html</p> -->
-        <a href="{% url 'Admin' %}">Admin</a>
-        <a href="{% url 'User' %}">User</a>
-        <a href="{% url 'TakeQuiz' %}">Quiz</a>
-        <a href="{% url 'AddQst' %}?category=General">Add Questions</a>
-    <p>Add Question .html</p>
 
     <!-- main code ithanu -->
     <form method="POST">
         {% csrf_token %}
         <input type="hidden" name="category" value="{{ category }}"> <!-- ivde venam -->
         <input type="button" value="Add Question" onclick="create()">
-        <input type="button" value="remove" onclick="remove()">
         <input type="submit">
-
-
-        <!-- js nu vendiyulla div -->
         <div id="QuestionBox"></div>
-        <!-- js nu vendiyulla div -->
-
-
     </form>
     <!-- main code ithanu -->
     {% for i in QuestionAndOptions %}
     <ul>
-        <!---Just question add akki kazhiyumbo display aakanam edit,delete button kodukkanum-->
         <div id="Qbox">
             <p><b>Question {{ forloop.counter }}:</b> {{ i.Ques }}</p>
             <p>Option 1:{{ i.op1 }}</p>
@@ -47,7 +37,7 @@
             <p>Option 4:{{ i.op4 }}</p>
             <P>{{ i.correct }} is selected as correct answer</P>
             <a href="{% url 'EditQues' i.id %}?category={{ category }}">
-            <button>Edit</button>
+                <button>Edit</button>
             </a>
             <a href="{% url 'Delete11' i.id %}"
                 onclick="return confirm('Are you sure you want to delete this question?');"><button>Delete</button></a>
@@ -58,5 +48,4 @@
 
 
 </body>
-
 </html>

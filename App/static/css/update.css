@@ -1,0 +1,82 @@
+/* ------------------ Reset ------------------ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+/* ------------------ Page Background ------------------ */
+body {
+    min-height: 100vh;
+    background: #eef2f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ------------------ Form Card ------------------ */
+form {
+    background: #ffffff;
+    padding: 35px 40px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+    animation: fadeIn 0.5s ease;
+}
+
+/* ------------------ Inputs ------------------ */
+input[type="text"] {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* ------------------ Button ------------------ */
+button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.35);
+}
+
+/* ------------------ Animation ------------------ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ------------------ Mobile ------------------ */
+@media (max-width: 480px) {
+    form {
+        padding: 25px 20px;
+    }
+}

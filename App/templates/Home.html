@@ -1,49 +1,30 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Quiz Website</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 100px;
-        }
-        h1 {
-            color: #333;
-        }
-        .btn {
-            padding: 12px 25px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            margin: 10px;
-            display: inline-block;
-        }
-        .btn:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
 </head>
+
 <body>
     <h1>Welcome to the Quiz Website!</h1>
 
     {% if user.is_authenticated %}
-        {% if user.is_superuser %}
-            <p>You are logged in as <strong>Admin</strong>.</p>
-            <a href="/admin/" class="btn">Go to Admin Dashboard</a>
-        {% else %}
-            <p>Welcome back, {{ user.username }}!</p>
-            <a href="{% url 'User' %}" class="btn">Go to Quiz</a>
-        {% endif %}
+    {% if user.is_superuser %}
+    <p>You are logged in as <strong>Admin</strong>.</p>
+    <a href="/admin/" class="btn">Go to Admin Dashboard</a>
     {% else %}
-        <p>Please register or login to continue:</p>
-        <a href="{% url 'UserReg' %}" class="btn">Register</a>
-        <a href="{% url 'login' %}" class="btn">Login</a>
+    <p>Welcome back, {{ user.username }}!</p>
+    <a href="{% url 'User' %}" class="btn">Go to Quiz</a>
+    {% endif %}
+    {% else %}
+    <p>Please register or login to continue:</p>
+    <a href="{% url 'UserReg' %}" class="btn">Register</a>
+    <a href="{% url 'login' %}" class="btn">Login</a>
     {% endif %}
 
 </body>

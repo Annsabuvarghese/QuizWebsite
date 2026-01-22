@@ -1,0 +1,135 @@
+/* ------------------ Reset ------------------ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+/* ------------------ Body ------------------ */
+body {
+    background: #eef2f7;
+    color: #1f2937;
+    line-height: 1.6;
+    padding: 20px 10px 50px 10px;
+}
+
+/* ------------------ Navigation ------------------ */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    gap: 20px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    padding-top: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #4f46e5;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background: #4f46e5;
+    color: white;
+}
+
+/* ------------------ Intro Box ------------------ */
+#IntroBox {
+    max-width: 1100px;
+    margin: 20px auto 40px auto;
+    padding: 35px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+#IntroBox p {
+    font-size: 15px;
+    color: #4b5563;
+    text-align: left;
+}
+
+/* ------------------ The Fix: Form as Grid Container ------------------ */
+form {
+    display: flex;
+    flex-direction: row;      /* THIS MAKES THEM SIDE-BY-SIDE */
+    flex-wrap: wrap;         /* Allows cards to move to next line if no space */
+    justify-content: center; /* Centers cards horizontally */
+    align-items: stretch;    /* Makes cards equal height */
+    gap: 25px;               /* Space between cards */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ------------------ Category Cards ------------------ */
+.categoryDiv {
+    background: #f8faff; /* Light card background */
+    padding: 40px 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    text-align: center;
+    
+    /* Grid Sizing */
+    flex: 1 1 300px;         /* Base width 300px, but can grow */
+    max-width: 360px;        /* Matches your target image width */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    transition: transform 0.3s ease;
+}
+
+.categoryDiv:hover {
+    transform: translateY(-8px);
+}
+
+.categoryDiv h2 {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #4f46e5;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.categoryDiv p {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+/* ------------------ Take Quiz Buttons ------------------ */
+.categoryDiv button {
+    width: 140px;            /* Narrower button as per your image */
+    margin: 0 auto;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    background: #6366f1;     /* Target purple color */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.categoryDiv button:hover {
+    background: #4f46e5;
+    transform: scale(1.05);
+}
+
+/* ------------------ Responsive ------------------ */
+@media (max-width: 768px) {
+    form {
+        flex-direction: column;
+        align-items: center;
+    }
+    .categoryDiv {
+        width: 100%;
+    }
+}

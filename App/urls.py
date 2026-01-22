@@ -20,5 +20,6 @@ urlpatterns = [
    path('UpdateUser/<int:id>/', views.UpdateUser, name='UpdateUser'),
    path('DisplayUser/<int:id>/', views.DisplayUser, name='DisplayUser'),
    path('Login/', views.UserLogin, name='UserLogin'),
-   path('Logout/', views.UserLogout, name='UserLogout')
+   path('Logout/', views.UserLogout, name='UserLogout'),
+   path('myprofile/', views.MyProfile, name='MyProfile'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

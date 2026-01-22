@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/AboutContact.css' %}">
+{% endblock %}
+{% block heading %}About Page{% endblock %}
+{% block content %}
+<div class="about-box">
+    <p>This project is developed using Django.</p>
+    <p>It helps users practice quizzes.</p>
+</div>
+{% endblock %}

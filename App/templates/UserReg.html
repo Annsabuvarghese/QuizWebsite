@@ -1,26 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/UserReg.css' %}">
 </head>
 <body>
-    <nav>
-        <a href="{% url 'Admin' %}">Admin</a>
-        <a href="{% url 'User' %}">User</a>
-        <a href="{% url 'TakeQuiz' %}">Quiz</a>
-        <a href="{% url 'AddQst' %}?category=General">Add Questions</a>
-    </nav>
-    <!-- name
-    place
-    email
-    education qualification
-    specify btech,diploma
-    age
-    photo
-    password 
-    confirm password -->
 
     <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -41,8 +28,13 @@
     <input type="file" name="photo" required><br><br>
 
     Password:<br>
-    <input type="password" name="password" required><br><br>
-
+    <input type="password" 
+       name="password" 
+       required
+       minlength="8"
+       pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}"
+       title="Password must be at least 8 characters long and include uppercase, lowercase, number, and special character"><br>
+    
     Confirm Password:<br>
     <input type="password" name="confirm_password" required><br><br>
 
